@@ -3,25 +3,57 @@ package com.krachkovsky.currencytesttask.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.krachkovsky.currencytesttask.data.CurrencyInfo
+import com.krachkovsky.currencytesttask.data.CurrencyStorage
 import com.krachkovsky.currencytesttask.databinding.CurrencyItemBinding
-import com.krachkovsky.currencytesttask.models.Currency
 import com.krachkovsky.currencytesttask.models.CurrencyData
 
-class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
+class CurrencyAdapter(private val currencyStorage: CurrencyStorage) :
+    RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 
     inner class CurrencyViewHolder(val binding: CurrencyItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val currentCurrencyList: Currency = Currency()
-    private val nextCurrencyList: Currency = Currency()
+    private val currencyData: MutableList<CurrencyListItem> = mutableListOf()
 
     fun setData(newCurrency: CurrencyData) {
-        currentCurrencyList.clear()
-        currentCurrencyList.addAll(newCurrency.current)
-        nextCurrencyList.clear()
-        nextCurrencyList.addAll(newCurrency.next)
+        currencyData.clear()
+        val savedItems = currencyStorage.getCurrencyInfos()
+        newCurrency.current.forEachIndexed { index, current ->
+            currencyData.add(
+                CurrencyListItem(
+                    abbreviation = current.abbreviation,
+                    id = current.id,
+                    name = current.name,
+                    nextRate = newCurrency.next[index].officialRate,
+                    currentRate = current.officialRate,
+                    scale = current.scale,
+                    orderPosition = if (savedItems.isEmpty()) {
+                        index
+                    } else {
+                        //TODO optimize with hashMap
+                        savedItems.find { t -> t.code == current.id }!!.sortOrder
+                    }
+                )
+            )
+        }
+        if (currencyStorage.getCurrencyInfos().isEmpty()) {
+            currencyStorage.saveCurrencyInfos(currencyData.map {
+                CurrencyInfo(it.id, true, it.orderPosition)
+            })
+        }
 
         notifyDataSetChanged()
+    }
+
+
+    fun saveCurrency(currency: List<CurrencyListItem>) {
+        val currencyInfos = mutableListOf<CurrencyInfo>()
+        currency.forEachIndexed { index, currencyItem ->
+            val currencyInfo = CurrencyInfo(currencyItem.id, true, index)
+            currencyInfos.add(currencyInfo)
+        }
+        currencyStorage.saveCurrencyInfos(currencyInfos)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
@@ -32,23 +64,19 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         with(holder) {
-            with(currentCurrencyList[position]) {
+            with(currencyData[position]) {
                 with(binding) {
                     tvCurAbbreviation.text = abbreviation
                     tvCurScale.text = scale.toString()
                     tvCurName.text = name.replaceFirstChar { it.lowercase() }
-                    tvCurCurrent.text = officialRate.toString()
-                }
-            }
-            with(nextCurrencyList[position]) {
-                with(binding) {
-                    tvCurNext.text = officialRate.toString()
+                    tvCurCurrent.text = currentRate.toString()
+                    tvCurNext.text = nextRate.toString()
                 }
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return currentCurrencyList.size
+        return currencyData.size
     }
 }

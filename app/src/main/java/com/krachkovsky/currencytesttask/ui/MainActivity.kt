@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.krachkovsky.currencytesttask.adapter.CurrencyAdapter
+import com.krachkovsky.currencytesttask.data.CurrencyStorage
 import com.krachkovsky.currencytesttask.databinding.ActivityMainBinding
 import com.krachkovsky.currencytesttask.models.Currency
 import org.koin.android.ext.android.inject
@@ -29,10 +30,6 @@ class MainActivity : AppCompatActivity() {
             binding.tvCurrentDay.text = it.current[0].date.dropLast(9).split("-").reversed().joinToString(".")
             binding.tvNextDay.text = it.next[0].date.dropLast(9).split("-").reversed().joinToString(".")
         })
-//        currencyViewModel.previousCurrencyData.observe(this, {
-//            currencyAdapter.setData(currentCurrency, it)
-//            binding.tvPreviousData.text = it[0].date.dropLast(9).split("-").reversed().joinToString(".")
-//        })
     }
 
 
