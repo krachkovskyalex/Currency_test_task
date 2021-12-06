@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:orientation="vertical"
+        app:layout_constraintHorizontal_weight="0.6"
         app:layout_constraintEnd_toStartOf="@+id/ll_cur_value"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -57,6 +58,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintHorizontal_weight="0.4"
         app:layout_constraintBottom_toBottomOf="@+id/ll_cur_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ll_cur_name"
@@ -66,9 +68,9 @@
             android:id="@+id/tv_cur_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="20dp"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="15sp"
             tools:text="1,9586" />
 
         <TextView
@@ -76,7 +78,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="15sp"
+
             tools:text="1,9586" />
 
     </LinearLayout>

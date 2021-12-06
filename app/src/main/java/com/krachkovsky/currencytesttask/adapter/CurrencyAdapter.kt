@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.krachkovsky.currencytesttask.databinding.CurrencyItemBinding
+import com.krachkovsky.currencytesttask.models.Currency
 import com.krachkovsky.currencytesttask.models.CurrencyItem
 
 class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
@@ -11,11 +12,14 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>
     inner class CurrencyViewHolder(val binding: CurrencyItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val currencyList: MutableList<CurrencyItem> = ArrayList()
+    private val currentCurrencyList: MutableList<CurrencyItem> = ArrayList()
+    private val previousCurrencyList: MutableList<CurrencyItem> = ArrayList()
 
-    fun setData(newCurrency: List<CurrencyItem>) {
-        currencyList.clear()
-        currencyList.addAll(newCurrency)
+    fun setCurrentData(newCurrentCurrency: Currency, newPreviousCurrency: Currency) {
+        currentCurrencyList.clear()
+        currentCurrencyList.addAll(newCurrentCurrency)
+        previousCurrencyList.clear()
+        previousCurrencyList.addAll(newPreviousCurrency)
 
         notifyDataSetChanged()
     }
@@ -28,7 +32,7 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         with(holder) {
-            with(currencyList[position]) {
+            with(currentCurrencyList[position]) {
                 with(binding) {
                     tvCurAbbreviation.text = abbreviation
                     tvCurScale.text = scale.toString()
@@ -36,10 +40,15 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>
                     tvCurCurrent.text = officialRate.toString()
                 }
             }
+            with(previousCurrencyList[position]) {
+                with(binding) {
+                    tvCurPrevious.text = officialRate.toString()
+                }
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return currencyList.size
+        return currentCurrencyList.size
     }
 }

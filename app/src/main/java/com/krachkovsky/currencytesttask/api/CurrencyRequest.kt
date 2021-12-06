@@ -7,6 +7,9 @@ import retrofit2.http.GET
 interface CurrencyRequest {
 
     @GET("rates?periodicity=0")
-    fun getCurrency(): Call<Currency>
+    fun getCurrentCurrency(): Call<Currency>
+
+    @GET("rates?ondate=2021-12-1&periodicity=0")
+    fun getPreviousCurrency(): Call<Currency>
 
 }

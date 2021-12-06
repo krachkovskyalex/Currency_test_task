@@ -12,14 +12,28 @@ import retrofit2.awaitResponse
 
 class CurrencyViewModel(val request: CurrencyApi) : ViewModel() {
 
-    val currencyData = MutableLiveData<Currency>()
+    val currentCurrencyData = MutableLiveData<Currency>()
+    val previousCurrencyData = MutableLiveData<Currency>()
 
-    fun getCurrency() {
+    fun getCurrentCurrency() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = request.createApiRequest().getCurrency().awaitResponse()
+                val response = request.createApiRequest().getCurrentCurrency().awaitResponse()
                 if (response.isSuccessful) {
-                    currencyData.postValue(response.body())
+                    currentCurrencyData.postValue(response.body())
+                    Log.e("AAA", response.body().toString())
+                }
+            } catch (e: Exception) {
+                Log.e("AAA", "Response Exception", e)
+            }
+        }
+    }
+    fun getPreviousCurrency() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = request.createApiRequest().getPreviousCurrency().awaitResponse()
+                if (response.isSuccessful) {
+                    previousCurrencyData.postValue(response.body())
                     Log.e("AAA", response.body().toString())
                 }
             } catch (e: Exception) {
