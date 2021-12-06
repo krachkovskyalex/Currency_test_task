@@ -23,15 +23,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         setupRecyclerView()
         currencyViewModel.getCurrentCurrency()
-        currencyViewModel.getPreviousCurrency()
-        currencyViewModel.currentCurrencyData.observe(this, {
-            val currentCurrency = it
-            binding.tvCurrentData.text = it[0].date.dropLast(9).split("-").reversed().joinToString(".")
-            currencyViewModel.previousCurrencyData.observe(this, {
-                currencyAdapter.setCurrentData(currentCurrency, it)
-                binding.tvPreviousData.text = it[0].date.dropLast(9).split("-").reversed().joinToString(".")
-            })
+        currencyViewModel.currencyData.observe(this, {
+            currencyAdapter.setData(it)
+            //TODO simple date format
+            binding.tvCurrentDay.text = it.current[0].date.dropLast(9).split("-").reversed().joinToString(".")
+            binding.tvNextDay.text = it.next[0].date.dropLast(9).split("-").reversed().joinToString(".")
         })
+//        currencyViewModel.previousCurrencyData.observe(this, {
+//            currencyAdapter.setData(currentCurrency, it)
+//            binding.tvPreviousData.text = it[0].date.dropLast(9).split("-").reversed().joinToString(".")
+//        })
     }
 
 

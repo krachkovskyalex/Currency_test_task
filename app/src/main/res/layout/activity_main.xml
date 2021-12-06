@@ -16,24 +16,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_previous_data"
+            android:id="@+id/tv_current_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:textColor="@color/black"
             android:textSize="13sp"
-            tools:text="05.12.21" />
+            tools:text="06.12.21" />
 
         <TextView
-            android:id="@+id/tv_current_data"
+            android:id="@+id/tv_next_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="13sp"
-            tools:text="06.12.21" />
+            tools:text="05.12.21" />
 
     </LinearLayout>
 

@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.krachkovsky.currencytesttask.databinding.CurrencyItemBinding
 import com.krachkovsky.currencytesttask.models.Currency
-import com.krachkovsky.currencytesttask.models.CurrencyItem
+import com.krachkovsky.currencytesttask.models.CurrencyData
 
 class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 
     inner class CurrencyViewHolder(val binding: CurrencyItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val currentCurrencyList: MutableList<CurrencyItem> = ArrayList()
-    private val previousCurrencyList: MutableList<CurrencyItem> = ArrayList()
+    private val currentCurrencyList: Currency = Currency()
+    private val nextCurrencyList: Currency = Currency()
 
-    fun setCurrentData(newCurrentCurrency: Currency, newPreviousCurrency: Currency) {
+    fun setData(newCurrency: CurrencyData) {
         currentCurrencyList.clear()
-        currentCurrencyList.addAll(newCurrentCurrency)
-        previousCurrencyList.clear()
-        previousCurrencyList.addAll(newPreviousCurrency)
+        currentCurrencyList.addAll(newCurrency.current)
+        nextCurrencyList.clear()
+        nextCurrencyList.addAll(newCurrency.next)
 
         notifyDataSetChanged()
     }
@@ -40,9 +40,9 @@ class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>
                     tvCurCurrent.text = officialRate.toString()
                 }
             }
-            with(previousCurrencyList[position]) {
+            with(nextCurrencyList[position]) {
                 with(binding) {
-                    tvCurPrevious.text = officialRate.toString()
+                    tvCurNext.text = officialRate.toString()
                 }
             }
         }

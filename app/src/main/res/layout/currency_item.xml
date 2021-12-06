@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:orientation="vertical"
-        app:layout_constraintHorizontal_weight="0.6"
         app:layout_constraintEnd_toStartOf="@+id/ll_cur_value"
+        app:layout_constraintHorizontal_weight="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,14 +58,15 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintHorizontal_weight="0.4"
         app:layout_constraintBottom_toBottomOf="@+id/ll_cur_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.4"
         app:layout_constraintStart_toEndOf="@+id/ll_cur_name"
-        app:layout_constraintTop_toTopOf="@+id/ll_cur_name" >
+        app:layout_constraintTop_toTopOf="@+id/ll_cur_name">
+
 
         <TextView
-            android:id="@+id/tv_cur_previous"
+            android:id="@+id/tv_cur_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -74,12 +75,11 @@
             tools:text="1,9586" />
 
         <TextView
-            android:id="@+id/tv_cur_current"
+            android:id="@+id/tv_cur_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="15sp"
-
             tools:text="1,9586" />
 
     </LinearLayout>
