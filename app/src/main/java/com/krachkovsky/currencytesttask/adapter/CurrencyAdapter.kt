@@ -42,16 +42,21 @@ class CurrencyAdapter(private val currencyStorage: CurrencyStorage) :
                 CurrencyInfo(it.id, true, it.orderPosition)
             })
         }
+        currencyData.sortBy { it.orderPosition }
 
         notifyDataSetChanged()
     }
 
+    fun swap(oldPosition: Int, newPosition: Int) {
+        val item = currencyData.removeAt(oldPosition)
+        currencyData.add(newPosition, item)
+        saveCurrency()
+    }
 
-    fun saveCurrency(currency: List<CurrencyListItem>) {
-        val currencyInfos = mutableListOf<CurrencyInfo>()
-        currency.forEachIndexed { index, currencyItem ->
-            val currencyInfo = CurrencyInfo(currencyItem.id, true, index)
-            currencyInfos.add(currencyInfo)
+
+    fun saveCurrency() {
+        val currencyInfos = currencyData.mapIndexed { index, item ->
+            CurrencyInfo(item.id, true, index)
         }
         currencyStorage.saveCurrencyInfos(currencyInfos)
     }

@@ -8,5 +8,5 @@ data class CurrencyListItem(
     val nextRate: Double,
     val currentRate: Double,
     val scale: Int,
-    val orderPosition: Int
+    var orderPosition: Int
 )
