@@ -10,5 +10,4 @@ interface CurRatesRequest {
     @GET("rates?periodicity=0")
     fun getCurRates(@Query("ondate") date: String): Call<List<CurRatesItem>>
 
-
 }

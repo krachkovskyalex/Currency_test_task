@@ -13,6 +13,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorAccent"
         android:elevation="4dp"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:menu="@menu/main_menu"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

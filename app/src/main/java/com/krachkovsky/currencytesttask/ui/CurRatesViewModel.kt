@@ -25,6 +25,7 @@ class CurRatesViewModel(private val request: CurRatesApi) : ViewModel() {
     }
 
     fun getCurrentCurrency() {
+        viewState.value = ViewState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             val curRatesCurrent: List<CurRatesItem>
             var currencyNext = getCurrency(getDate(1))
@@ -35,7 +36,12 @@ class CurRatesViewModel(private val request: CurRatesApi) : ViewModel() {
                 curRatesCurrent = getCurrency(getDate())
             }
             curRatesData = CurRatesData(curRatesCurrent, currencyNext)
-            viewState.postValue(ViewState.CurRatesScreen(curRatesData!!))
+            if (curRatesCurrent.isNullOrEmpty()) {
+                viewState.postValue(ViewState.Error)
+            } else {
+                viewState.postValue(ViewState.CurRatesScreen(curRatesData!!))
+            }
+
         }
     }
 
@@ -72,6 +78,7 @@ class CurRatesViewModel(private val request: CurRatesApi) : ViewModel() {
     sealed class ViewState {
         object Loading : ViewState()
         object Editing : ViewState()
+        object Error : ViewState()
         data class CurRatesScreen(val data: CurRatesData) : ViewState()
     }
 }

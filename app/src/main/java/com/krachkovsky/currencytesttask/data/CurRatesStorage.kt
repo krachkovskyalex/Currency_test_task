@@ -9,7 +9,8 @@ class CurRatesStorage(context: Context) {
     private val gson = Gson()
 
     private val sharedPref = context.getSharedPreferences(
-        PREFERENCE_KEY, Context.MODE_PRIVATE)
+        PREFERENCE_KEY, Context.MODE_PRIVATE
+    )
 
     companion object {
         const val PREFERENCE_KEY = "prefs"
@@ -18,13 +19,12 @@ class CurRatesStorage(context: Context) {
 
     fun getCurRatesInfos(): List<CurRatesInfo> {
         val value = sharedPref.getString(SORTING_PREF, "[]")
-//        val value = "[]"
         val itemType = object : TypeToken<List<CurRatesInfo>>() {}.type
-        val itemList = gson.fromJson<List<CurRatesInfo>>(value, itemType)
-        return itemList
+        return gson.fromJson(value, itemType)
     }
+
     fun saveCurRatesInfos(infos: List<CurRatesInfo>) {
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             val value = gson.toJson(infos)
             putString(SORTING_PREF, value)
             apply()

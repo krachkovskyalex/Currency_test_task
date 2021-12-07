@@ -83,7 +83,9 @@ class CurRatesAdapter(private val curRatesStorage: CurRatesStorage) :
         val currencyInfos = curRatesData.mapIndexed { index, item ->
             CurRatesInfo(item.id, item.visible, index)
         }
-        curRatesStorage.saveCurRatesInfos(currencyInfos)
+        if (currencyInfos.isNotEmpty()) {
+            curRatesStorage.saveCurRatesInfos(currencyInfos)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {

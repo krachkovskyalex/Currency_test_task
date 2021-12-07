@@ -11,7 +11,7 @@ class CurRatesApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // Start Koin
+
         startKoin{
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@CurRatesApp)
