@@ -41,7 +41,7 @@ class CurRatesViewModel(private val request: CurRatesApi) : ViewModel() {
 
     suspend fun getCurrency(date: String): List<CurRatesItem> {
         try {
-            val response = request.createApiRequest().getCurrency(date).awaitResponse()
+            val response = request.createApiRequest().getCurRates(date).awaitResponse()
             if (response.isSuccessful) {
                 Log.e("getCurrentCurrency", response.body().toString())
                 responseError.postValue(false)

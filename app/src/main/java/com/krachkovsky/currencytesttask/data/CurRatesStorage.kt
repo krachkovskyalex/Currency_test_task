@@ -16,14 +16,14 @@ class CurRatesStorage(context: Context) {
         const val SORTING_PREF = "sorting"
     }
 
-    fun getCurrencyInfos(): List<CurRatesInfo> {
+    fun getCurRatesInfos(): List<CurRatesInfo> {
         val value = sharedPref.getString(SORTING_PREF, "[]")
 //        val value = "[]"
         val itemType = object : TypeToken<List<CurRatesInfo>>() {}.type
         val itemList = gson.fromJson<List<CurRatesInfo>>(value, itemType)
         return itemList
     }
-    fun saveCurrencyInfos(infos: List<CurRatesInfo>) {
+    fun saveCurRatesInfos(infos: List<CurRatesInfo>) {
         with (sharedPref.edit()) {
             val value = gson.toJson(infos)
             putString(SORTING_PREF, value)

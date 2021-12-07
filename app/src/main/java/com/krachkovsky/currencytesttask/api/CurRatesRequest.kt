@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface CurRatesRequest {
 
     @GET("rates?periodicity=0")
-    fun getCurrency(@Query("ondate") date: String): Call<List<CurRatesItem>>
+    fun getCurRates(@Query("ondate") date: String): Call<List<CurRatesItem>>
 
 
 }

@@ -108,7 +108,7 @@ class CurRatesActivity : AppCompatActivity() {
             target: RecyclerView.ViewHolder
         ): Boolean {
             // Notify your adapter that an item is moved from x position to y position
-            curRatesAdapter.swap(viewHolder.adapterPosition, target.adapterPosition)
+            curRatesAdapter.swapCurRatesItemPosition(viewHolder.adapterPosition, target.adapterPosition)
             curRatesAdapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
             return true
         }
