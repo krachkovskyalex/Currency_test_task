@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class CurrencyStorage(context: Context) {
+class CurRatesStorage(context: Context) {
 
     private val gson = Gson()
 
@@ -16,14 +16,14 @@ class CurrencyStorage(context: Context) {
         const val SORTING_PREF = "sorting"
     }
 
-    fun getCurrencyInfos(): List<CurrencyInfo> {
+    fun getCurrencyInfos(): List<CurRatesInfo> {
         val value = sharedPref.getString(SORTING_PREF, "[]")
 //        val value = "[]"
-        val itemType = object : TypeToken<List<CurrencyInfo>>() {}.type
-        val itemList = gson.fromJson<List<CurrencyInfo>>(value, itemType)
+        val itemType = object : TypeToken<List<CurRatesInfo>>() {}.type
+        val itemList = gson.fromJson<List<CurRatesInfo>>(value, itemType)
         return itemList
     }
-    fun saveCurrencyInfos(infos: List<CurrencyInfo>) {
+    fun saveCurrencyInfos(infos: List<CurRatesInfo>) {
         with (sharedPref.edit()) {
             val value = gson.toJson(infos)
             putString(SORTING_PREF, value)

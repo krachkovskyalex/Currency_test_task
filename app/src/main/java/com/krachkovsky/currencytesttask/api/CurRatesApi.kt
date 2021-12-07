@@ -6,9 +6,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CurrencyApi {
+class CurRatesApi {
 
-    fun createApiRequest(): CurrencyRequest {
+    fun createApiRequest(): CurRatesRequest {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
@@ -19,7 +19,7 @@ class CurrencyApi {
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(CurrencyRequest::class.java)
+            .create(CurRatesRequest::class.java)
     }
 
 }

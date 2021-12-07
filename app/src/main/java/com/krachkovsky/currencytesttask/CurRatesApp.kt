@@ -7,14 +7,14 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-class CurrencyApp : Application() {
+class CurRatesApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
         // Start Koin
         startKoin{
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-            androidContext(this@CurrencyApp)
+            androidContext(this@CurRatesApp)
             modules(appModule)
         }
     }

@@ -2,7 +2,7 @@ package com.krachkovsky.currencytesttask.data
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrencyInfo(
+data class CurRatesInfo(
     @SerializedName("code")
     val code: Int,
     @SerializedName("isVisible")

@@ -2,7 +2,7 @@ package com.krachkovsky.currencytesttask.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrencyItem(
+data class CurRatesItem(
     @SerializedName("Cur_Abbreviation")
     val abbreviation: String,
     @SerializedName("Cur_ID")

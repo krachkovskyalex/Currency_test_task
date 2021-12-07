@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:padding="8dp">
 
     <LinearLayout
         android:id="@+id/ll_cur_name"
@@ -82,6 +81,28 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             tools:text="1,9586" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_cur_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_cur_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.4"
+        app:layout_constraintStart_toEndOf="@+id/ll_cur_name"
+        app:layout_constraintTop_toTopOf="@+id/ll_cur_name">
+
+
+        <Switch
+            android:id="@+id/sw_cur_visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
